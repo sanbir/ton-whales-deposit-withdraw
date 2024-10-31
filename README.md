@@ -25,3 +25,7 @@ npm install
 5. Select `TON Connect compatible mobile wallet (example: Tonkeeper)`
 6. Confirm in your wallet
 
+
+## Custom Pool
+
+Look into [`wrappers/Pool/constants.ts`](./wrappers/Pool/constants.ts) and change the `POOL_ADDRESS` to the pool you want to use.
