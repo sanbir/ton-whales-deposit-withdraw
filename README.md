@@ -1,26 +1,27 @@
 # ton-whales-deposit-withdraw
 
-## Project structure
+## Install
 
--   `contracts` - source code of all the smart contracts of the project and their dependencies.
--   `wrappers` - wrapper classes (implementing `Contract` from ton-core) for the contracts, including any [de]serialization primitives and compilation functions.
--   `tests` - tests for the contracts.
--   `scripts` - scripts used by the project, mainly the deployment scripts.
+```bash
+npm install
+```
 
 ## How to use
 
-### Build
+### Deposit
+1. Look into [`scripts/deposit.ts`](./scripts/deposit.ts) and change `value` to the amount you want to deposit
+2. Run `npx blueprint run`
+3. Select `deposit`
+4. Select `testnet`
+5. Select `TON Connect compatible mobile wallet (example: Tonkeeper)`
+6. Confirm in your wallet
 
-`npx blueprint build` or `yarn blueprint build`
 
-### Test
+### Withdraw
+1. Look into [`scripts/withdraw.ts`](./scripts/withdraw.ts) and change `withdrawAmount` to the amount you want to withdraw
+2. Run `npx blueprint run`
+3. Select `withdraw`
+4. Select `testnet`
+5. Select `TON Connect compatible mobile wallet (example: Tonkeeper)`
+6. Confirm in your wallet
 
-`npx blueprint test` or `yarn blueprint test`
-
-### Deploy or run another script
-
-`npx blueprint run` or `yarn blueprint run`
-
-### Add a new contract
-
-`npx blueprint create ContractName` or `yarn blueprint create ContractName`
