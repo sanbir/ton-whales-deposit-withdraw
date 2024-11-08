@@ -1,15 +1,10 @@
-import {
-    Address,
-    Cell,
-    Contract,
-    ContractProvider,
-    Sender,
-    SendMode,
-} from '@ton/core';
+import { Address, Cell, Contract, ContractProvider, Sender, SendMode, toNano } from '@ton/core';
 import {
     DepositStakeParams,
     getDepositStakeMessageBody,
+    getRecoverStakeMessageBody,
     getWithdrawStakeMessageBody,
+    RecoverStakeParams,
     WithdrawStakeParams,
 } from './utils/message-constructors';
 
@@ -65,6 +60,20 @@ export class Pool implements Contract {
             value: opts.value,
             sendMode: SendMode.PAY_GAS_SEPARATELY,
             body: getDepositStakeMessageBody(opts),
+        });
+    }
+
+    async sendRecoverStake(provider: ContractProvider, via: Sender, opts: RecoverStakeParams) {
+        if (opts.value === undefined) {
+            opts.value = toNano('2.0');
+        }
+        if (opts.value < toNano('2.0')) {
+            throw new RangeError(`sent amount must be more than stake fee (${toNano('2.0')}): ${opts.value}`);
+        }
+        return provider.internal(via, {
+            value: opts.value,
+            sendMode: SendMode.PAY_GAS_SEPARATELY,
+            body: getRecoverStakeMessageBody(opts),
         });
     }
 }

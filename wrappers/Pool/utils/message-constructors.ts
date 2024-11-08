@@ -28,3 +28,16 @@ export function getDepositStakeMessageBody({ value, queryId }: DepositStakeParam
         .storeCoins(value ?? toNano('0.0001')) // gas_limit
         .endCell();
 }
+
+export type RecoverStakeParams = {
+    value?: bigint;
+    queryId?: number;
+};
+/** op::stake_recover */
+export function getRecoverStakeMessageBody({ queryId, value }: RecoverStakeParams) {
+    return beginCell()
+        .storeUint(OP_CODES.RECOVER_STAKE, 32) // op
+        .storeUint(queryId ?? Date.now(), 64) // query_id
+        .storeCoins(value ?? toNano('0.0001')) // gas_limit
+        .endCell();
+}
